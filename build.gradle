@@ -24,7 +24,7 @@ dependencies {
 
 task runScript(type: JavaExec) {
     description 'Run NoiseModelling'
-    jvmArgs = ['-Xms2048m']
+    jvmArgs = ['-Xms2048m', '-Xmx12288m']
     classpath sourceSets.main.runtimeClasspath
     main = "org.noise_planet.roademission.Main"
     if (project.hasProperty('workdir')) {

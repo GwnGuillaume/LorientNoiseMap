@@ -116,24 +116,24 @@ class TrafficPropagationProcessData extends PropagationProcessData {
         double hv_e_speed = rs.getDouble("hv_e_speed")
         double wav_e_speed = rs.getDouble("wav_e_spee")
         double wbv_e_speed = rs.getDouble("wbv_e_spee")
-        double lv_n_speed =rs.getDouble("lv_n_speed")
+        double lv_n_speed = rs.getDouble("lv_n_speed")
         double mv_n_speed = rs.getDouble("mv_n_speed")
         double hv_n_speed = rs.getDouble("hv_n_speed")
         double wav_n_speed =rs.getDouble("wav_n_spee")
         double wbv_n_speed = rs.getDouble("wbv_n_spee")
-        double vl_d_per_hour = rs.getDouble("lv_d_per_h")
-        double ml_d_per_hour =rs.getDouble("ml_d_per_h")
-        double pl_d_per_hour = rs.getDouble("hv_d_per_h")
+        double vl_d_per_hour = rs.getDouble("lv_d_per_h")   // rs.getDouble("vl_d_per_h") -> PA
+        double ml_d_per_hour = rs.getDouble("ml_d_per_h")
+        double pl_d_per_hour = rs.getDouble("hv_d_per_h")   // rs.getDouble("pl_d_per_h") -> PA
         double wa_d_per_hour = rs.getDouble("wa_d_per_h")
-        double wb_d_per_hour =rs.getDouble("wb_d_per_h")
-        double vl_e_per_hour = rs.getDouble("lv_e_per_h")
+        double wb_d_per_hour = rs.getDouble("wb_d_per_h")
+        double vl_e_per_hour = rs.getDouble("lv_e_per_h")   // rs.getDouble("vl_e_per_h") -> PA
         double ml_e_per_hour = rs.getDouble("ml_e_per_h")
-        double pl_e_per_hour = rs.getDouble("hv_e_per_h")
+        double pl_e_per_hour = rs.getDouble("hv_e_per_h")   // rs.getDouble("pl_e_per_h") -> PA
         double wa_e_per_hour = rs.getDouble("wa_e_per_h")
         double wb_e_per_hour = rs.getDouble("wb_e_per_h")
-        double vl_n_per_hour =rs.getDouble("lv_n_per_h")
+        double vl_n_per_hour = rs.getDouble("lv_n_per_h")   // rs.getDouble("vl_n_per_h") -> PA
         double ml_n_per_hour = rs.getDouble("ml_n_per_h")
-        double pl_n_per_hour = rs.getDouble("hv_n_per_h")
+        double pl_n_per_hour = rs.getDouble("hv_n_per_h")   // rs.getDouble("pl_n_per_h") -> PA
         double wa_n_per_hour = rs.getDouble("wa_n_per_h")
         double wb_n_per_hour = rs.getDouble("wb_n_per_h")
         double Zstart = rs.getDouble("Zstart")
@@ -153,13 +153,13 @@ class TrafficPropagationProcessData extends PropagationProcessData {
         for(int freq : PropagationProcessPathData.freq_lvl) {
             RSParametersCnossos srcParameters_d = new RSParametersCnossos(lv_d_speed, mv_d_speed, hv_d_speed, wav_d_speed, wbv_d_speed,
                     vl_d_per_hour , ml_d_per_hour , pl_d_per_hour , wa_d_per_hour , wb_d_per_hour ,
-                    freq, 20.0d, "FR_R2", 0, 0, 200.0d, Junc_type)
+                    freq, 20.0d, "NL01", 0, 0, 200.0d, Junc_type)
             RSParametersCnossos srcParameters_e = new RSParametersCnossos(lv_e_speed, mv_e_speed, hv_e_speed, wav_e_speed, wbv_e_speed,
                     vl_e_per_hour , ml_e_per_hour , pl_e_per_hour , wa_e_per_hour , wb_e_per_hour ,
-                    freq, 20.0d, "FR_R2", 0, 0, 200.0d, Junc_type)
+                    freq, 20.0d, "NL01", 0, 0, 200.0d, Junc_type)
             RSParametersCnossos srcParameters_n = new RSParametersCnossos(lv_n_speed, mv_n_speed, hv_n_speed, wav_n_speed, wbv_n_speed,
                     vl_n_per_hour , ml_n_per_hour , pl_n_per_hour , wa_n_per_hour , wb_n_per_hour ,
-                    freq, 20.0d, "FR_R2", 0, 0, 200.0d, Junc_type)
+                    freq, 20.0d, "NL01", 0, 0, 200.0d, Junc_type)
 
             srcParameters_d.setSlopePercentage(RSParametersCnossos.computeSlope(Zstart, Zend, the_geom.getLength()))
             srcParameters_e.setSlopePercentage(RSParametersCnossos.computeSlope(Zstart, Zend, the_geom.getLength()))
@@ -174,12 +174,12 @@ class TrafficPropagationProcessData extends PropagationProcessData {
             idFreq++
         }
 
-        // Average
-        for(int i=0; i<ld.size(); i++) {
-            ld[i] = ld[i] / (LDAY_STOP_HOUR - LDAY_START_HOUR)
-            le[i] = le[i] / (LEVE_STOP_HOUR - LEVE_START_HOUR)
-            ln[i] = ln[i] / ((24.0D-LNIG_START_HOUR) + LNIG_STOP_HOUR)
-        }
+//        // Average
+//        for(int i=0; i<ld.size(); i++) {
+//            ld[i] = ld[i] / (LDAY_STOP_HOUR - LDAY_START_HOUR)
+//            le[i] = le[i] / (LEVE_STOP_HOUR - LEVE_START_HOUR)
+//            ln[i] = ln[i] / ((24.0D-LNIG_START_HOUR) + LNIG_STOP_HOUR)
+//        }
         wjSourcesD.add(ld)
         wjSourcesE.add(le)
         wjSourcesN.add(ln)
